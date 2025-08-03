@@ -53,7 +53,7 @@ pub fn build(b: *std.Build) !void {
     }
 
     const usbhid_exe = b.addExecutable(.{
-        .name = "upshid-ups",
+        .name = "usbhid-ups",
         .root_module = usbhid,
     });
     b.installArtifact(usbhid_exe);
