@@ -4,8 +4,8 @@
     .minimum_zig_version = "0.14.1",
     .dependencies = .{
         .nut = .{
-            .url = "https://github.com/networkupstools/nut/releases/download/v2.8.3/nut-2.8.3.tar.gz",
-            .hash = "N-V-__8AAHHzQAGPfVl0KszneRdDULLoSahKJh8-NboLU4J1",
+            .url = "https://github.com/networkupstools/nut/releases/download/v2.8.4/nut-2.8.4.tar.gz",
+            .hash = "N-V-__8AAIvTUwFBf2XAqQEXOX2sIyBwtQTddccAkuz-60Rj",
         },
         .libusb = .{
             .url = "git+https://github.com/jjkh/libusb#8b7db0b1c70b10bbaa4aa12ee75694f193af62f5",
