@@ -1,8 +1,13 @@
 const std = @import("std");
 
-const version = std.SemanticVersion.parse(
-    @import("build.zig.zon").version,
-) catch unreachable;
+// NOTE: temporary workaround for features not yet available in Zig 0.14.1
+const zig_version = @import("builtin").zig_version;
+const post_writergate = zig_version.major > 0 or zig_version.minor >= 15;
+
+const version = if (post_writergate)
+    std.SemanticVersion.parse(@import("build.zig.zon").version) catch unreachable
+else
+    std.SemanticVersion{ .major = 2, .minor = 8, .patch = 3 };
 
 pub fn build(b: *std.Build) !void {
     const upstream = b.dependency("nut", .{});
@@ -25,14 +30,24 @@ pub fn build(b: *std.Build) !void {
         .link_libc = true,
     });
 
-    usbhid.addIncludePath(generateNutVersionHeader(b).getDirectory());
+    const version_str = std.fmt.comptimePrint(if (post_writergate) "{f}" else "{}", .{version});
+    const nut_version_header = b.addConfigHeader(.{
+        .style = .blank,
+        .include_path = "nut_version.h",
+    }, .{
+        .NUT_VERSION_MACRO = version_str,
+        .NUT_VERSION_SEMVER_MACRO = version_str,
+        .NUT_VERSION_IS_RELEASE = 1,
+        .NUT_VERSION_IS_PRERELEASE = 0,
+    });
+    usbhid.addIncludePath(nut_version_header.getOutput().dirname());
 
     const config_header = createConfigHeaderStep(
         b,
         include_dir.path(b, "config.h.in"),
         target.result,
     );
-    usbhid.addIncludePath(config_header.getOutputDir());
+    usbhid.addIncludePath(config_header.getOutput().dirname());
 
     usbhid.addIncludePath(include_dir);
     usbhid.addIncludePath(common_dir);
@@ -291,7 +306,7 @@ fn createConfigHeaderStep(
         .__EXTENSIONS__ = 1,
 
         // target-specific defines
-        .CPU_TYPE = @tagName(target.cpu.arch.family()),
+        .CPU_TYPE = @tagName(target.cpu.arch),
         .HAVE_IPHLPAPI_H = defFromBool(is_windows),
         .HAVE_WINDOWS_H = defFromBool(is_windows),
         .HAVE_WINSOCK2_H = defFromBool(is_windows),
@@ -626,20 +641,6 @@ fn createConfigHeaderStep(
 
 fn defFromBool(val: bool) ?u1 {
     return if (val) 1 else null;
-}
-
-fn generateNutVersionHeader(b: *std.Build) *std.Build.Step.WriteFile {
-    var buf: [200]u8 = undefined;
-    const data = std.fmt.bufPrint(
-        &buf,
-        \\#define NUT_VERSION_MACRO "{f}"
-        \\#define NUT_VERSION_SEMVER_MACRO "{f}"
-        \\#define NUT_VERSION_IS_RELEASE 1
-        \\#define NUT_VERSION_IS_PRERELEASE 0
-    ,
-        .{ version, version },
-    ) catch unreachable;
-    return b.addWriteFile("nut_version.h", data);
 }
 
 const usbhid_driver_files: []const []const u8 = &.{

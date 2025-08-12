@@ -8,8 +8,9 @@
 
 * Only the `usbhid-ups` driver is being built
 * Builds on `aarch64-macos`, `x86_64-windows` and `x86_64-linux`
-    * Runs on MacOS, but have not tested with a UPS
-* Requires Zig 0.15.0-dev.1254 or later
+    * Runs on MacOS
+    * Tested with APC UPS on Windows
+* Requires Zig 0.14.1 or later
 
 ## Building
 

@@ -1,7 +1,7 @@
 .{
     .name = .nut,
     .version = "2.8.3",
-    .minimum_zig_version = "0.15.0-dev.1254",
+    .minimum_zig_version = "0.14.1",
     .dependencies = .{
         .nut = .{
             .url = "https://github.com/networkupstools/nut/releases/download/v2.8.3/nut-2.8.3.tar.gz",
