@@ -102,7 +102,7 @@ fn createConfigHeaderStep(
         .HAVE_DECL_LOCALTIME_R = defFromBool(!is_windows),
         .HAVE_LOCALTIME_S = defFromBool(!is_windows),
         .HAVE_DECL_LOCALTIME_S = defFromBool(!is_windows),
-        .HAVE_STRPTIME = defFromBool(!is_windows),
+        .HAVE_STRPTIME = defFromBool(!is_windows and !target.abi.isGnu()),
         .HAVE_WINDOWS_H = defFromBool(is_windows),
         .HAVE_WINSOCK2_H = defFromBool(is_windows),
         .HAVE_WS2TCPIP_H = defFromBool(is_windows),
