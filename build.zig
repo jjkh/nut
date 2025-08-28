@@ -14,6 +14,8 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
+    const drivers = b.option([]const []const u8, "driver", "Drivers to build (defaults to all)") orelse driver_sources.keys();
+
     const common_dir = upstream.path("common");
     const include_dir = upstream.path("include");
     const drivers_dir = upstream.path("drivers");
@@ -43,8 +45,17 @@ pub fn build(b: *std.Build) !void {
         target.result,
     );
 
+    for (drivers) |driver| {
+        if (!driver_sources.has(driver))
+            std.log.err("unknown driver: {s}", .{driver});
+    }
+
     // TODO: support specifying the drivers to build
     for (driver_sources.keys()) |driver_name| {
+        for (drivers) |d| {
+            if (std.mem.eql(u8, d, driver_name)) break;
+        } else continue;
+
         const driver_mod = b.createModule(.{
             .target = target,
             .optimize = optimize,
