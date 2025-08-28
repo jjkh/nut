@@ -23,14 +23,15 @@
 * [ ] GPIO driver
 * [ ] Configuration options (default dirs, ports, libraries to link, etc.)
 * [ ] Don't log driver build warnings when listing `--help`
+* [ ] Generate some defines at build time (e.g. `NUT_NETVERSION`, `CC_VERSION`)
 
 ## Building
 
 ```sh
 # to build all supported drivers
 zig build
-# to build specific drivers
-zig build -Ddriver=usbhid-ups -Ddriver=nutdrv_qx
+# to build specific drivers (release mode, baseline CPU)
+zig build -Ddriver=usbhid-ups -Ddriver=nutdrv_qx -Doptimize=ReleaseFast -Dcpu=baseline
 
 # to run
 ./zig-out/bin/upshid-ups

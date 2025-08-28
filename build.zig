@@ -528,16 +528,16 @@ fn createConfigHeaderStep(
 
         // build info
         .NUT_NETVERSION = "1.3", // TODO get this from somewhere?
-        .NUT_WEBSITE_BASE = "https://www.networkupstools.org/historic/v2.8.3",
+        .NUT_WEBSITE_BASE = "https://www.networkupstools.org/historic/v2.8.4",
         .PACKAGE = "nut",
         .PACKAGE_BUGREPORT = "https://github.com/networkupstools/nut/issues",
         .PACKAGE_NAME = "nut",
-        .PACKAGE_STRING = "nut 2.8.3", // TODO get this from somewhere?
+        .PACKAGE_STRING = "nut 2.8.4", // TODO get this from somewhere?
         .PACKAGE_TARNAME = "nut",
-        .PACKAGE_URL = "https://www.networkupstools.org/historic/v2.8.3/index.html",
-        .PACKAGE_VERSION = "2.8.3", // TODO get this from somewhere?
+        .PACKAGE_URL = "https://www.networkupstools.org/historic/v2.8.4/index.html",
+        .PACKAGE_VERSION = "2.8.4", // TODO get this from somewhere?
         .TREE_VERSION = "2.8",
-        .VERSION = "2.8.3",
+        .VERSION = "2.8.4",
 
         // compiler and build system details
         .AC_APPLE_UNIVERSAL_BUILD = null,
