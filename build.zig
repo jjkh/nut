@@ -39,11 +39,7 @@ pub fn build(b: *std.Build) !void {
         .NUT_VERSION_IS_PRERELEASE = 0,
     });
 
-    const config_header = createConfigHeaderStep(
-        b,
-        include_dir.path(b, "config.h.in"),
-        target.result,
-    );
+    const config_header = createConfigHeaderStep(b, target.result);
 
     for (drivers) |driver| {
         if (!driver_sources.has(driver))
@@ -459,7 +455,6 @@ const common_src_files: []const []const u8 = &.{
 
 fn createConfigHeaderStep(
     b: *std.Build,
-    input_file: std.Build.LazyPath,
     target: std.Target,
 ) *std.Build.Step.ConfigHeader {
     const is_windows = target.os.tag == .windows;
@@ -1019,7 +1014,7 @@ fn createConfigHeaderStep(
     };
 
     return b.addConfigHeader(
-        .{ .style = .{ .autoconf_undef = input_file } },
+        .{ .style = .blank },
         opts,
     );
 }

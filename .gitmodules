@@ -1,0 +1,9 @@
+[submodule "nut"]
+	path = nut
+	url = https://github.com/networkupstools/nut
+[submodule "libusb/libusb"]
+	path = libusb/libusb
+	url = https://github.com/libusb/libusb
+[submodule "mingw-regex"]
+	path = mingw-regex
+	url = https://git.code.sf.net/p/mingw/regex

@@ -1,0 +1,15 @@
+.{
+    .name = .libusb,
+    .version = "1.0.29",
+    .dependencies = .{
+        .libusb = .{ .path = "./libusb" },
+    },
+    .minimum_zig_version = "0.14.1",
+    .paths = .{
+        "README",
+        "COPYING",
+        "build.zig",
+        "build.zig.zon",
+    },
+    .fingerprint = 0x3e6dc4cc5ad3d9a8,
+}
