@@ -8,11 +8,11 @@
             .hash = "N-V-__8AAIvTUwFBf2XAqQEXOX2sIyBwtQTddccAkuz-60Rj",
         },
         .libusb = .{
-            .url = "git+https://github.com/jjkh/libusb#8b7db0b1c70b10bbaa4aa12ee75694f193af62f5",
-            .hash = "libusb-1.0.26-qNnTWgCNFwAhSdoCWfPbt6bAgv2JMzLH4WjpMpcUlpcl",
+            .url = "git+https://github.com/jjkh/libusb?ref=v1.0.29#67fc8a67935fcf2b8105e462d6e67260522f6e1e",
+            .hash = "libusb-1.0.29-qNnTWg6MAAD4pNLdLRLzA7nOoliBx97-bGZMPL-IO6-q",
         },
         .@"mingw-regex" = .{
-            .url = "http://netcologne.dl.sourceforge.net/project/mingw/Other/UserContributed/regex/mingw-regex-2.5.1/mingw-libgnurx-2.5.1-src.tar.gz",
+            .url = "git+https://netcologne.dl.sourceforge.net/project/mingw/Other/UserContributed/regex/mingw-regex-2.5.1/mingw-libgnurx-2.5.1-src.tar.gz",
             .hash = "N-V-__8AAGekBwAJQ4w4J4zNMh4kpC_C13ekHW42mV2mkZav",
             .lazy = true,
         },
